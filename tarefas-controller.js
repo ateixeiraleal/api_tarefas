@@ -2,7 +2,6 @@ var Tarefas = require('./tarefas-model')
 
 exports.cadastrarTarefa = function (req, res) {
     let tarefa = new Tarefas({
-        identificacao: req.body.identificacao,
         descricao: req.body.descricao,
         prazo: req.body.prazo,
         completa: req.body.completa
@@ -29,7 +28,7 @@ exports.buscarTarefa= function (req, res) {
     })
 }
 
-exports.atualizarTarefa= function (req, res) {
+exports.alterarTarefa= function (req, res) {
     
 }
 
