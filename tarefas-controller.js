@@ -11,7 +11,7 @@ exports.cadastrarTarefa = function (req, res) {
             return next(err)
         }
     })
-    res.send('Tarefa cadastrada com sucesso.')
+    res.send('Tarefa cadastrada com sucesso!')
 }
 
 exports.listarTarefas = function (req, res) {
@@ -29,9 +29,20 @@ exports.buscarTarefa= function (req, res) {
 }
 
 exports.alterarTarefa= function (req, res) {
-    
+    tarefa = buscarTarefa(req, res);
+
 }
 
 exports.deletarTarefa= function (req, res) {
-    
+    Tarefas.deleteOne({_id: req.params.id}, function(err, tarefa){
+        if (err) return res.status(400).json({
+            error: true,
+            message: "Error: Tarefa não foi excluída :-("
+        })
+    })
+
+    return res.json({
+        error: false,
+        message: "Tarefa excluída com sucesso :-)"
+    })
 }
