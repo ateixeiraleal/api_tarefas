@@ -21,19 +21,29 @@ exports.listarTarefas = function (req, res) {
     })
 }
 
-exports.buscarTarefa= function (req, res) {
+exports.buscarTarefa = function (req, res) {
     Tarefas.findById(req.params.id, function(err, tarefa){
         if (err) return next(err)
         return res.json(tarefa)
     })
 }
 
-exports.alterarTarefa= function (req, res) {
-    tarefa = buscarTarefa(req, res);
-
+exports.alterarTarefa = function (req, res) {
+    tarefas.findOneAndUpdate({_id: req.params.id},
+        {$set: {descricao: "teste"}},
+        function(err, tarefa){
+        if (err) return res.status(400).json({
+            error: true,
+            message: "Error: Tarefa não foi alterada :-("
+        })
+    })
+    return res.json({
+        error: false,
+        message: "Tarefa alterada com sucesso :-)"
+    })
 }
 
-exports.deletarTarefa= function (req, res) {
+exports.deletarTarefa = function (req, res) {
     Tarefas.deleteOne({_id: req.params.id}, function(err, tarefa){
         if (err) return res.status(400).json({
             error: true,
