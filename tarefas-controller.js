@@ -29,7 +29,11 @@ exports.buscarTarefa = function (req, res) {
 }
 
 exports.alterarTarefa = function (req, res) {
-    tarefas.findOneAndUpdate({_id: req.params.id}, function(err, tarefa){
+    Tarefas.findOneAndUpdate({_id: req.params.id}, {$set: {
+        descricao: "Jantar com o rei",
+        prazo: "2021-07-01",
+        completa: false
+        }}, function(err, tarefa){
         if (err) return res.status(400).json({
             error: true,
             message: "Error: Tarefa não foi alterada :-("
